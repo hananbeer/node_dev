@@ -15,9 +15,8 @@ async def reload(request):
     if not re.match('^[0-9A-Za-z_-]+$', module_name):
         return web.Response(text='Invalid module name', status=400)
 
-    module = importlib.import_module(module_name)
     # ensure the module is reloaded
-    importlib.reload(module)
+    module = importlib.import_module(module_name)
     load_custom_node('custom_nodes/' + module_name)
     return web.Response(text='OK') #headers={'Location': '/'})
 
